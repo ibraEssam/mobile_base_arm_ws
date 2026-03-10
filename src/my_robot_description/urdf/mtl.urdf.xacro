@@ -24,4 +24,13 @@
     <material name="black">
         <color rgba="0.0 0.0 0.0 1" />
     </material>
+
+    <material name="dark_red">
+        <color rgba="0.4 0 0 0.8" />
+    </material>
+
+    <material name="dark_green">
+        <color rgba="0.0 0.4 0 0.8" />
+    </material>
+
 </robot>
