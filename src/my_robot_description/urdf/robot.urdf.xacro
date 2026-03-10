@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+<robot name="my_arm" xmlns:xacro="http://www.ros.org/wiki/xacro">
+    <xacro:include filename="mtl.urdf.xacro" />
+    <xacro:include filename="arm.urdf.xacro" />
+
+</robot>
