@@ -2,5 +2,12 @@
 <robot name="my_arm" xmlns:xacro="http://www.ros.org/wiki/xacro">
     <xacro:include filename="mtl.urdf.xacro" />
     <xacro:include filename="arm.urdf.xacro" />
+    <xacro:include filename="gripper.urdf.xacro" />
 
+    <!-- Connect the gripper to ef -->
+    <joint name="gripper_base_joint" type="fixed">
+        <parent link="tool_link" />
+        <child link="gripper_base_link" />
+        <origin xyz="0 0 0" rpy="0 0 0" />
+    </joint>
 </robot>
