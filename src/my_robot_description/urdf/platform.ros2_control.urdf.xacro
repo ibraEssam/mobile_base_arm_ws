@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<robot name="my_platform" xmlns:xacro="http://www.ros.org/wiki/xacro">
+    <xacro:include filename="mtl.urdf.xacro" />
+    <xacro:include filename="arm.urdf.xacro" />
+    <xacro:include filename="gripper.urdf.xacro" />
+    <xacro:include filename="mobile_base.urdf.xacro" />
+    <xacro:include filename="ros2_control/mobile_base.ros2_control.xacro" />
+    <xacro:include filename="ros2_control/arm.ros2_control.xacro" />
+    <xacro:include filename="ros2_control/gripper.ros2_control.xacro" />
+
+    <!-- Connect the gripper to ef -->
+    <joint name="gripper_base_joint" type="fixed">
+        <parent link="tool_link" />
+        <child link="gripper_base_link" />
+        <origin xyz="0 0 0" rpy="0 0 0" />
+    </joint>
+
+    <!-- Connect the arm to the base -->
+    <joint name="arm_base_joint" type="fixed">
+        <parent link="mobile_base_link" />
+        <child link="arm_base_link" />
+        <origin xyz="0 0 0.3" rpy="0 0 0" />
+    </joint>
+</robot>

@@ -1,11 +1,10 @@
 <?xml version="1.0"?>
 <?xml-model href="http://download.ros.org/schema/package_format3.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
 <package format="3">
-  <name>my_robot_moveit_config</name>
+  <name>arm_moveit_config</name>
   <version>0.3.0</version>
-  <description>
-     An automatically generated package with all the configuration and launch files for using the my_arm with the MoveIt Motion Planning Framework
-  </description>
+  <description> An automatically generated package with all the configuration and launch files for
+    using the my_arm with the MoveIt Motion Planning Framework </description>
   <maintainer email="ibrahim@todo.com">Ibrahim</maintainer>
 
   <license>BSD-3-Clause</license>
@@ -47,6 +46,6 @@
 
 
   <export>
-      <build_type>ament_cmake</build_type>
+    <build_type>ament_cmake</build_type>
   </export>
 </package>
