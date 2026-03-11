@@ -1,5 +1,7 @@
 # 6DOF Robot Arm on a Mobile Base
 
+![screenshot](media/Screenshot.png)
+
 ## Overview
 
 This workspace contains ROS 2 packages for a 6DOF robot arm mounted on a mobile base, including robot description, bringup launch files, and MoveIt configuration for planning and visualization.
@@ -68,8 +70,7 @@ Or
 ros2 launch platform_movit_config demo.launch.py
 ```
 
-## Notes
+## TODO
 
-- Adjust joint limits and collision geometry in `src/my_robot_description/urdf/arm.urdf.xacro` as needed.
-- If using the mobile platform variant, use `ros2 launch platform_movit_config demo.launch.py`.
-
+- [ ] Add a gazebo simulation 
+- [ ] Add 3D sensors (Lidar/Depth Camera)
