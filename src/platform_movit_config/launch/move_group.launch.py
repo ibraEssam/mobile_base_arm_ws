@@ -3,17 +3,24 @@ import os
 from launch import LaunchDescription
 from launch.actions import (
     DeclareLaunchArgument,
+    IncludeLaunchDescription,
 )
+from launch.conditions import IfCondition
+from launch.launch_description_sources import PythonLaunchDescriptionSource
 from launch.substitutions import LaunchConfiguration
 from launch_ros.parameter_descriptions import ParameterValue
 from moveit_configs_utils import MoveItConfigsBuilder
 from moveit_configs_utils.launch_utils import (
     DeclareBooleanLaunchArg,
+    IfCondition,
     add_debuggable_node,
 )
 
 
-def generate_move_group_launch(moveit_config):
+def generate_move_group_launch(moveit_config, launch_package_path=None):
+    if launch_package_path == None:
+        launch_package_path = moveit_config.package_path
+
     ld = LaunchDescription()
 
     # use sim time for Gazebo integration
@@ -44,6 +51,19 @@ def generate_move_group_launch(moveit_config):
         DeclareLaunchArgument(
             "disable_capabilities",
             default_value=moveit_config.move_group_capabilities["disable_capabilities"],
+        )
+    )
+
+    # use rviz
+    ld.add_action(DeclareBooleanLaunchArg("use_rviz", default_value=True))
+
+    # Run Rviz and load the default config to see the state of the move_group node
+    ld.add_action(
+        IncludeLaunchDescription(
+            PythonLaunchDescriptionSource(
+                str(launch_package_path / "launch/moveit_rviz.launch.py")
+            ),
+            condition=IfCondition(LaunchConfiguration("use_rviz")),
         )
     )
 
