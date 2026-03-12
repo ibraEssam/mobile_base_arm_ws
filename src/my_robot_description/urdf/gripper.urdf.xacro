@@ -31,6 +31,7 @@
                 <box size="0.02 0.06 0.08" />
             </geometry>
         </collision>
+        <xacro:box_inertia m="0.1" x="0.02" y="0.06" z="0.08" o_xyz="0 0 0.04" o_rpy="0 0 0" />
     </link>
 
     <joint name="gripper_left_finger_joint" type="prismatic">
@@ -55,6 +56,7 @@
                 <box size="0.02 0.06 0.08" />
             </geometry>
         </collision>
+        <xacro:box_inertia m="0.1" x="0.02" y="0.06" z="0.08" o_xyz="0 0 0.04" o_rpy="0 0 0" />
     </link>
 
     <joint name="gripper_right_finger_joint" type="prismatic">
