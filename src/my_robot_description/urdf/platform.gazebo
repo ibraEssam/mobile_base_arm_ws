@@ -27,6 +27,37 @@
         <mu2 value="0.1" />
     </gazebo>
 
+    <!-- Add camera to the endeffector -->
+    <link name="camera_link">
+        <visual>
+            <geometry>
+                <box size="0.1 0.01 0.01" />
+            </geometry>
+        </visual>
+    </link>
+
+    <joint name="camera_joint" type="fixed">
+        <parent link="tool_link" />
+        <child link="camera_link" />
+        <origin xyz="0.1 0 0" rpy="0 0 0" />
+    </joint>
+
+    <!-- camera -->
+    <gazebo reference="camera_link">
+        <sensor name="camera1" type="camera">
+            <update_rate>30.0</update_rate>
+            <topic>/ef_camera/image_raw</topic>
+            <camera name="head">
+                <horizontal_fov>1.3962634</horizontal_fov>
+                <image>
+                    <width>1920</width>
+                    <height>1200</height>
+                    <format>R8G8B8</format>
+                </image>
+            </camera>
+        </sensor>
+    </gazebo>
+
     <ros2_control name="Platform" type="system">
         <hardware>
             <plugin>gz_ros2_control/GazeboSimSystem</plugin>
@@ -93,5 +124,4 @@
             <parameters>$(find platform_movit_config)/config/ros2_controllers.yaml</parameters>
         </plugin>
     </gazebo>
-
 </robot>
