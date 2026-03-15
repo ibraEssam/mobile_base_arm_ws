@@ -26,11 +26,11 @@
     </material>
 
     <material name="dark_red">
-        <color rgba="0.4 0 0 0.8" />
+        <color rgba="0.4 0 0 1.0" />
     </material>
 
     <material name="dark_green">
-        <color rgba="0.0 0.4 0 0.8" />
+        <color rgba="0.0 0.4 0 1.0" />
     </material>
 
 </robot>
