@@ -15,6 +15,9 @@ def generate_launch_description():
     gz_bridge_config = os.path.join(
         get_package_share_directory("my_robot_bringup"), "config", "gazebo_bridge.yaml"
     )
+    world_file = os.path.join(
+        get_package_share_directory("my_robot_bringup"), "worlds", "warehouse.sdf"
+    )
 
     # include gazebo launch file
     gz_launch_file = os.path.join(
@@ -22,7 +25,7 @@ def generate_launch_description():
     )
     gz_launch = IncludeLaunchDescription(
         PythonLaunchDescriptionSource(gz_launch_file),
-        launch_arguments={"gz_args": "empty.sdf -r "}.items(),
+        launch_arguments={"gz_args": f"{world_file} -r "}.items(),
     )
 
     # spawn robot in gazebo
@@ -83,7 +86,21 @@ def generate_launch_description():
         "move_group.launch.py",
     )
     move_group_launch = IncludeLaunchDescription(
-        PythonLaunchDescriptionSource(move_group_launch_file)
+        PythonLaunchDescriptionSource(move_group_launch_file),
+        launch_arguments={"use_rviz": "false"}.items(),
+    )
+
+    ## Rviz
+    rviz_node = Node(
+        package="rviz2",
+        executable="rviz2",
+        name="rviz2",
+        arguments=[
+            "-d",
+            os.path.join(
+                get_package_share_directory("my_robot_bringup"), "rviz", "gazebo.rviz"
+            ),
+        ],
     )
 
     return LaunchDescription(
@@ -95,5 +112,6 @@ def generate_launch_description():
             spawn_controllers_launch,
             diff_controller_spawner,
             move_group_launch,
+            rviz_node,
         ]
     )
