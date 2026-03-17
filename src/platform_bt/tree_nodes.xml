@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<!--
+  For instructions on using Groot and description of the following BehaviorTree nodes,
+  please refer to the groot_instructions.md and README.md respectively located in the
+  nav2_behavior_tree package.
+-->
+<root BTCPP_format="4">
+    <TreeNodesModel>
+        <Condition ID="PubCmdVel">
+            <input_port name="topic_name" type="std::string"
+                default="__default__placeholder__">Topic name</input_port>
+            <input_port name="linear_x">Linear velocity</input_port>
+            <input_port name="angular_z">Angular velocity</input_port>
+        </Condition>
+    </TreeNodesModel>
+</root>

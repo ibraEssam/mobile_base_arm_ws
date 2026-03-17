@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root BTCPP_format="4"
+    main_tree_to_execute="PickAndPlace">
+    <BehaviorTree ID="PickAndPlace">
+        <Repeat num_cycles="1000">
+            <PubCmdVel topic_name="/diff_drive_controller/cmd_vel"
+                linear_x="0.50"
+                angular_z="0.0" />
+        </Repeat>
+    </BehaviorTree>
+
+    <!-- Description of Node Models (used by Groot) -->
+    <TreeNodesModel />
+
+</root>
