@@ -35,6 +35,14 @@ This workspace contains ROS 2 packages for a 6DOF robot arm mounted on a mobile 
   - Includes mobile base controllers (differential drive) plus the arm MoveIt planning configurations.
   - Same set of MoveIt launch files as `arm_moveit_config` for a mobile base context.
 
+- `platform_bt`
+  - Behavior tree implementation and execution for the platform.
+  - Implemented behavior tree nodes:
+    - `PubCmdVel`: Publishes `TwistStamped` messages to control the mobile base velocity.
+      - Input ports: `topic_name`, `linear_x`, `angular_z`
+  - Behavior trees:
+    - `PickAndPlace`: Example tree that moves the robot base forward.
+
 ## Key launch files
 
 - `ros2 launch my_robot_bringup gazebo.launch.py`
@@ -52,33 +60,51 @@ This workspace contains ROS 2 packages for a 6DOF robot arm mounted on a mobile 
 - `ros2 launch platform_movit_config demo.launch.py`
   - Full MoveIt demo for the platform (Mobile base + Robot Arm) including RViz and move_group interaction.
 
+- `ros2 launch platform_bt bt_executor.launch.py`
+  - Start the behavior tree executor server for autonomous task execution.
+
 ## Quick start
 
-1. Source ROS 2 and workspace:
+1. Source ROS 2:
 
 ```bash
 source /opt/ros/<distro>/setup.bash
+```
+
+2. Download 3rd party dependencies:
+
+```bash
+cd src
+vcs import < 3rdparty.repos
+```
+
+3. Build the workspace:
+
+```bash
+colcon build
+```
+
+4. Source the workspace:
+
+```bash
 source install/setup.bash
 ```
 
-2. Visualize model:
+5. Start Gazebo simulation:
 
 ```bash
-ros2 launch my_robot_description display.launch.py
+ros2 launch my_robot_bringup gazebo.launch.py
 ```
 
-3. Start MoveIt demo (arm+gripper):
+6. Start the behavior tree server
 
 ```bash
-ros2 launch arm_moveit_config demo.launch.py
+ros2 launch platform_bt bt_executor.launch.py
 ```
-
-Or
-
-3. Start MoveIt demo (Platform):
+7. Run a behavior tree for example (PickAndPlace)
 
 ```bash
-ros2 launch platform_movit_config demo.launch.py
+ros2 action send_goal /behavior_server btcpp_ros2_interfaces/action/ExecuteTree "{target_tree: PickAndPlace}"
 ```
 
 ## TODO
